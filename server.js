@@ -58,7 +58,6 @@ async function initBrowser() {
     // Launch browser
     globalBrowser = await chromium.launch({
         headless: isProduction, // Headless on server, visible locally
-        channel: 'chrome',
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',

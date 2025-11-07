@@ -57,16 +57,19 @@ async function initBrowser() {
     
     // Launch browser
     globalBrowser = await chromium.launch({
-    headless: true,  // ADD THIS LINE - uses Chromium Headless Shell
-    args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-blink-features=AutomationControlled',
-        '--disable-infobars',
-        '--disable-dev-shm-usage',
-        '--window-size=1920,1080'
-    ]
-});
+        headless: true,
+        args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--disable-blink-features=AutomationControlled',
+            '--disable-infobars',
+            '--disable-dev-shm-usage',
+            '--disable-gpu',  // ADD THIS
+            '--single-process',  // ADD THIS for Render
+            '--window-size=1920,1080'
+        ]
+    });
+
     console.log(`🔧 Running in ${isProduction ? 'PRODUCTION' : 'DEVELOPMENT'} mode`);
     
     // Check if we have saved auth state

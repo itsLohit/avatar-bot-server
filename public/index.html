@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activate Avatar Spirit Bot</title>
+    <style>
+        * { 
+            box-sizing: border-box; 
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 550px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .bot-icon {
+            font-size: 64px;
+            margin-bottom: 10px;
+        }
+        
+        h1 { 
+            color: #667eea; 
+            margin-bottom: 8px;
+            font-size: 28px;
+        }
+        
+        .subtitle { 
+            color: #666; 
+            font-size: 14px;
+        }
+        
+        .form-group { 
+            margin-bottom: 24px; 
+        }
+        
+        label { 
+            display: block; 
+            font-weight: 600; 
+            margin-bottom: 8px; 
+            color: #333;
+            font-size: 14px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        small { 
+            color: #999; 
+            font-size: 12px; 
+            display: block; 
+            margin-top: 6px;
+            line-height: 1.4;
+        }
+        
+        small a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        small a:hover {
+            text-decoration: underline;
+        }
+        
+        button {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        
+        button:hover:not(:disabled) { 
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        button:active:not(:disabled) { 
+            transform: translateY(0); 
+        }
+        
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .status {
+            margin-top: 24px;
+            padding: 16px;
+            border-radius: 10px;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+        
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+        
+        .status.loading {
+            background: #fff3cd;
+            color: #856404;
+            border: 2px solid #ffeeba;
+        }
+        
+        .status strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        
+        .loader {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 3px solid rgba(0,0,0,0.1);
+            border-radius: 50%;
+            border-top-color: #856404;
+            animation: spin 0.8s linear infinite;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 24px;
+            color: #999;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="bot-icon">🤖</div>
+            <h1>Avatar Spirit Bot</h1>
+            <p class="subtitle">Activate bot in your Free4Talk room</p>
+        </div>
+        
+        <form id="activationForm">
+            <div class="form-group">
+                <label for="subscriptionId">Subscription ID</label>
+                <input 
+                    type="text" 
+                    id="subscriptionId" 
+                    placeholder="SUB_ABC123456..." 
+                    required
+                    autocomplete="off"
+                >
+                <small>You received this via email after subscribing (minimum 5 characters)</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="geminiKey">Your Gemini API Key</label>
+                <input 
+                    type="text" 
+                    id="geminiKey" 
+                    placeholder="AIzaSy..." 
+                    required
+                    autocomplete="off"
+                >
+                <small>Get your free API key at <a href="https://aistudio.google.com/app/apikey" target="_blank">Google AI Studio</a> (takes 30 seconds)</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="roomLink">Free4Talk Room Link</label>
+                <input 
+                    type="text" 
+                    id="roomLink" 
+                    placeholder="https://free4talk.com/room/abc-xyz-123" 
+                    required
+                    autocomplete="off"
+                >
+                <small>Copy your current room URL from your Free4Talk browser tab</small>
+            </div>
+            
+            <button type="submit" id="submitBtn">
+                🚀 Activate Bot in My Room
+            </button>
+        </form>
+        
+        <div id="status" class="status"></div>
+        
+        <div class="footer">
+            Powered by Avatar Spirit Bot • Free4Talk Automation
+        </div>
+    </div>
+    
+    <script>
+        const form = document.getElementById('activationForm');
+        const statusDiv = document.getElementById('status');
+        const submitBtn = document.getElementById('submitBtn');
+        
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="loader"></span> Activating...';
+            
+            statusDiv.className = 'status loading';
+            statusDiv.style.display = 'block';
+            statusDiv.innerHTML = '<strong>⏳ Activating bot...</strong>Please wait while we join your room.';
+            
+            const data = {
+                subscriptionId: document.getElementById('subscriptionId').value.trim(),
+                geminiKey: document.getElementById('geminiKey').value.trim(),
+                roomLink: document.getElementById('roomLink').value.trim()
+            };
+            
+            try {
+                const response = await fetch('/api/activate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    statusDiv.className = 'status success';
+                    statusDiv.innerHTML = `
+                        <strong>✅ Success!</strong>
+                        ${result.message}<br><br>
+                        Look for <strong>"AvatarSpiritBot"</strong> in your Free4Talk room within 60 seconds.<br>
+                        Try typing "avatar help" to test it!
+                    `;
+                    
+                    // Reset form
+                    form.reset();
+                } else {
+                    statusDiv.className = 'status error';
+                    statusDiv.innerHTML = `
+                        <strong>❌ Activation Failed</strong>
+                        ${result.error || 'Unknown error occurred'}
+                    `;
+                }
+            } catch (error) {
+                statusDiv.className = 'status error';
+                statusDiv.innerHTML = `
+                    <strong>❌ Connection Error</strong>
+                    Could not reach the server. Make sure the bot server is running.
+                `;
+            } finally {
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '🚀 Activate Bot in My Room';
+            }
+        });
+        
+        // Auto-hide status after 10 seconds on success
+        const observer = new MutationObserver(() => {
+            if (statusDiv.classList.contains('success')) {
+                setTimeout(() => {
+                    statusDiv.style.display = 'none';
+                }, 10000);
+            }
+        });
+        
+        observer.observe(statusDiv, { attributes: true, attributeFilter: ['class'] });
+    </script>
+</body>
+</html>

@@ -4,8 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "postinstall": "playwright install --with-deps",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

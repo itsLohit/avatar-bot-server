@@ -792,18 +792,3 @@ process.on('SIGINT', async () => {
 });
 
 
-async function testAI() {
-    const botLogic = require('./bot-logic');
-    const testKey = 'AIzaSyAROooyzGBp7-XpJAoD1iMPTOtMzbzwI38'; // Replace with your actual key
-    
-    const reply = await botLogic.getGeminiReply(
-        'TestUser',
-        'Hello avatar, how are you?',
-        [],
-        testKey
-    );
-    
-    console.log('AI Test Reply:', reply);
-}
-
-testAI(); 

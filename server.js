@@ -70,6 +70,13 @@ async function initBrowser() {
         ]
     });
 
+    // On Render, use system chromium
+    if (isProduction) {
+        launchOptions.executablePath = '/usr/bin/chromium-browser';
+    }
+    
+    globalBrowser = await chromium.launch(launchOptions);
+
     console.log(`🔧 Running in ${isProduction ? 'PRODUCTION' : 'DEVELOPMENT'} mode`);
     
     // Check if we have saved auth state

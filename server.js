@@ -57,7 +57,7 @@ async function initBrowser() {
     
     // Launch browser
     globalBrowser = await chromium.launch({
-    headless: 'new',  // ADD THIS LINE - uses Chromium Headless Shell
+    headless: true,  // ADD THIS LINE - uses Chromium Headless Shell
     args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
